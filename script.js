@@ -2,7 +2,7 @@ const form = document.getElementById('cedulaForm');
 const input = document.getElementById('cedulaInput');
 const resultado = document.getElementById('resultado');
 
-const API_URL = 'https://cedula-validator.onrender.com';
+const API_URL = 'https://cedula-validator.onrender.com/validar';
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
