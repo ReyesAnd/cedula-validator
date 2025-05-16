@@ -2,6 +2,7 @@ const form = document.getElementById('cedulaForm');
 const input = document.getElementById('cedulaInput');
 const resultado = document.getElementById('resultado');
 
+//const API_URL = 'https://cedula-validator.onrender.com/validar';
 const API_URL = 'https://cedula-validator.onrender.com/validar';
 
 form.addEventListener('submit', async (e) => {
@@ -16,25 +17,43 @@ form.addEventListener('submit', async (e) => {
   }
 
   try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ cedula })
-    });
-
+    const res = await fetch(`${API_URL}?cedula=${cedula}`);
     const data = await res.json();
 
     if (res.ok) {
-      resultado.style.color = data.valid ? 'green' : 'red';
-      resultado.textContent = data.message;
+      resultado.style.color = data.valida ? 'green' : 'red';
+      resultado.textContent = data.mensaje;
     } else {
       resultado.style.color = 'red';
-      resultado.textContent = data.message || 'Error en la validación';
+      resultado.textContent = data.mensaje || 'Error en la validación';
     }
   } catch (error) {
     resultado.style.color = 'red';
     resultado.textContent = 'Error al conectar con el servidor';
   }
 });
+  
+ // try {
+    //const res = await fetch(API_URL, {
+      //method: 'POST',
+      //headers: {
+        //'Content-Type': 'application/json'
+      //},
+      //body: JSON.stringify({ cedula })
+    //});
+
+    //const data = await res.json();
+
+    //if (res.ok) {
+      //resultado.style.color = data.valid ? 'green' : 'red';
+      //resultado.textContent = data.message;
+    //} else {
+     // resultado.style.color = 'red';
+      //resultado.textContent = data.message || 'Error en la validación';
+    //}
+  //} catch (error) {
+   // resultado.style.color = 'red';
+   // resultado.textContent = 'Error al conectar con el servidor';
+  //}
+//});
+    
